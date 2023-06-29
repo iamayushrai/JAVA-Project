@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+<head th:replace="fragments ::html_head">
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+<div th:replace="fragments ::html_header"></div>
+<div class="container">
+
+<!-- Login card start-->
+<div class="card shadow f-ch" style="width: 35rem; margin-top: 10px; border-radius: 50px; background-color: #F5F5F5; " >
+				<div class="card-body">
+					<center>
+						<i class="	fa fa-user-plus" style="font-size: 48px;color: blue;"></i>
+					</center>
+					<h5 class="card-title" align="center" >My Profile<div th:if="${message}" th:text="${message}" class="alert alert-danger mt-2" />
+<div th:if="${error}" th:text="${error}"  class="alert alert-success"/></h5>
+    <form th:action="@{/login/profile}" method="post" th:object="${form}">
+    <div class="form-group">
+    <label for="exampleInputEmail1">First Name</label>
+    <input type="text"  class="form-control" id="" aria-describedby="" th:field="*{firstName}" th:value="${form.firstName}" >
+  	<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error"></span>	
+  	
+  		</div>
+  		<div class="form-group">
+    <label for="exampleInputEmail1">Last Name</label>
+    <input type="text"  name="lastName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" th:field="*{lastName}" th:value="${form.lastName}">
+  		<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error"></span>
+  		</div>
+    	<div class="form-group">
+    <label for="exampleInputEmail1">Login</label>
+    <input type="email" name="login" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" th:field="*{login}" th:value="${form.login}">
+  		<span th:if="${#fields.hasErrors('login')}" th:errors="*{login}" class="error"></span>
+  		</div>
+  		
+  		<div class="form-group">
+    <label for="exampleInputEmail1">Mobile Number</label>
+    <input type="text" name="contactNo" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" th:field="*{contactNo}" th:value="${form.contactNo}">
+  		<span th:if="${#fields.hasErrors('contactNo')}" th:errors="*{contactNo}" class="error"></span>
+  		</div>
+  		<div class="mb-3">
+							<label for="exampleInputEmail1" class="form-label">Date of Birth</label> <input type="text"  class="form-control"
+								id="exampleInputEmail1" aria-describedby="emailHelp" th:field="*{dob}" th:value="${form.dob}" placeholder="MM/DD/YYYY">
+								<span th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}" class="error"></span>
+						</div>
+  		<div class="mt-2" align="center">
+  		
+  		<input type="submit" value="Save" name="operation" class="btn btn-primary"></div>
+  		
+    </form>
+    
+  </div>
+</div>
+<!-- Login card end -->
+</div>
+<div th:replace="fragments ::html_footer"></div>
+</body>
+</html>

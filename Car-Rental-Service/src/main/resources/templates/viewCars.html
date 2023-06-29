@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+<head th:replace="fragments ::html_head">
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+	<div th:replace="fragments ::html_header"></div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-3 mt-5" style="margin-left: 40%;">
+			<!-- Brand View Start  -->
+			<ul class="list-group">
+			
+				<li href="#" class="list-group-item list-group-item-action active f-ch"
+					aria-current="true" style="color: blue; color: white;"> All Brand </li> <a href="#"
+					th:href="@{/user/brand/{id}(id=${brand.id})}"
+					th:each="brand : ${brand}"><li class="list-group-item"
+					th:text="${brand.carBrand}"></li></a>
+			</ul>
+			<!-- Brand View End  -->
+		</div>
+		<div class="col-sm-9">
+			<!-- Vehicle View Start -->
+			<div class="row " style="margin-left: 10%">
+				<div class="col-sm-4 d-flex justify-content-center mt-2" th:each="vehicle : ${vehicles}">
+
+					<div class="card" style="width: 18rem;">
+						<img th:src="@{'/image?id='+${vehicle.id}}" class="card-img-top" style="height: 100px;" alt="...">
+						<div class="card-body">
+						<div class="card-title" th:text="${vehicle.brand.carBrand}"></div>
+							<table class="table ">
+							<tr class="card-text">
+							<td>Model Name </td><td th:text="${vehicle.modelName}"></td></tr>
+							<tr class="card-text"><td>Seater </td><td th:text="${vehicle.seater}"></td></tr>
+							<tr class="card-text"><td>Vehicle Name: </td><td th:text="${vehicle.vehicleName}"></td></tr>
+							<tr class="card-text"><td>Price: </td><td th:text="${vehicle.price}"></td></tr>
+							
+							</table>
+							<div class="container text-center">
+							<a class="book" th:href="@{'/user/book/vehicles/'} + ${vehicle.id}">Book</a></div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!-- Vehicle View End -->
+		</div>
+	</div>
+</div>
+	<div th:replace="fragments ::html_footer"></div>
+</body>
+</html>

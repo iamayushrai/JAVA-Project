@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+<head th:replace="fragments ::html_head">
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+<div th:replace="fragments ::html_header"></div>
+<div class="container">
+<div class="card shadow f-ch" style="width: 35rem; margin-top: 10px; border-radius: 50px; background-color: #F5F5F5; " >
+				<div class="card-body">
+					<center>
+						<i class="	fa fa-user-circle" style="font-size: 48px;color: blue;"></i>
+					</center>
+					<h5 class="card-title" align="center" >Login<div th:if="${message}" th:text="${message}" class="alert alert-danger mt-2" />
+<div th:if="${error}" th:text="${error}"  class="alert alert-success"/></h5>
+					<hr />
+					<form th:action="@{/login}" method="post" th:object="${form}">
+						<div class="mb-3">
+							<label for="exampleInputEmail1" class="form-label">Email
+								address</label> <input type="email" class="form-control"
+								id="exampleInputEmail1" aria-describedby="emailHelp" th:field="*{login}" th:vlue="${form.login}">
+								<span th:if="${#fields.hasErrors('login')}" th:errors="*{login}" class="error"></span>
+						</div>
+						<div class="mb-3">
+							<label for="exampleInputPassword1" class="form-label">Password</label>
+							<input type="password" class="form-control "
+								id="exampleInputEmail1" aria-describedby="emailHelp" th:field="*{password}" th:value="${form.password}" >
+								<span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></span>
+								
+						</div>
+						<center>
+							<button type="submit" class="btn btn-primary" name="operation" value="SignIn">Login <i class="	fa fa-sign-in"></i></button>
+							<a th:href="@{/register}"  class="btn btn-primary">If Not a customer? <i class="fa fa-user-plus"></i></a>
+						</center>
+					</form>
+				</div>
+			</div>
+</div>
+<div th:replace="fragments ::html_footer"></div>
+</body>
+</html>

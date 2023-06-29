@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+<head th:replace="fragments ::html_head">
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+<div th:replace="fragments ::html_header"></div>
+<div class="container">
+<div class="card mt-5 shadow">
+  <div class="card-header bg-bg text-center f-ch " style="color: white">
+    View My Booking
+  </div>
+  <div class="text-center mt-2 f-ch" >
+  <!-- <form th:action="@{/admin/users}">
+  <input type="text" placeholder="Search By First Name" class="search" name="firstName" >
+  <div class="container mt-1 text-center">
+  <button type="submit" class="btn btn-outline-primary"><i class="fa fa-search"></i></button>
+  <button type="submit" class="btn btn-outline-primary"><i class="fa fa-times"></i></button>
+  </div>
+  </form> -->
+  </div>
+  <div class="card-body">
+    <table class="table table-bordered shadow">
+  <thead class="f-ch">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Contact No.</th>
+      <th scope="col">Vehicle Name</th>
+      <th scope="col">Login</th>
+      <th scope="col">Booking Date</th>
+      <th scope="col">Pick Up Time</th>
+      <th scope="col">Download Receipt</th>
+    </tr>
+  </thead>
+  <tbody >
+    <tr th:each="b : ${bookingList}">
+      <td><i class="fa fa-asterisk"></i></td>
+      <td th:text="${b.user.firstName}"></td>
+      <td th:text="${b.user.contactNo}"></td>
+      <td th:text="${b.vehicle.vehicleName}"></td>
+      <td th:text="${b.user.login}"></td>
+      <td th:text="${b.bookingDate}"></td>
+      <td th:text="${b.bookingPickupTime}"></td>
+      <td> <a th:href="@{'/pdf/user/'} + ${b.id}"><i class="	fa fa-download"></i></a></td>
+     
+      
+    </tr>
+    <tr th:if="${bookingList.isEmpty()}">
+	<td class="text-center f-ch" colspan="4" style="color: red;">Sorry! No Record Found....</td>
+	</tr>
+  </tbody>
+</table>
+  </div>
+</div>
+
+
+</div>
+<div th:replace="fragments ::html_footer"></div>
+</body>
+</html>

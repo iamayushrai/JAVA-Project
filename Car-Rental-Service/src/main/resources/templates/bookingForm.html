@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+<head th:replace="fragments ::html_head">
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+<div th:replace="fragments ::html_header"></div>
+<div class="container">
+<div class="row mt-5">
+    <div class="col-sm-6">
+    <!-- <div class="row " style="margin-left: 10%"> -->
+				<div class=" mt-2" th:each="vehicle : ${vehicles}">
+
+					<div class="card" style="width: 18rem;">
+						<img th:src="@{'/image?id='+${vehicle.id}}" class="card-img-top" style="height: 100px;" alt="...">
+						<div class="card-body">
+						<div class="card-title" th:text="${vehicle.brand.carBrand}"></div>
+							<table class="table ">
+							<tr class="card-text">
+							<td>Model Name </td><td th:text="${vehicle.modelName}"></td></tr>
+							<tr class="card-text"><td>Seater </td><td th:text="${vehicle.seater}"></td></tr>
+							<tr class="card-text"><td>Vehicle Name: </td><td th:text="${vehicle.vehicleName}"></td></tr>
+							<tr class="card-text"><td>Price: </td><td th:text="${vehicle.price}"></td></tr>
+							
+							</table>
+							<div class="container text-center">
+							
+						</div>
+					</div>
+				</div>
+
+			</div>
+    </div>
+    <div class="col-sm-6">
+    <div class="card shadow f-ch" style="width: 35rem; margin-top: 10px; border-radius: 50px; background-color: #F5F5F5; " >
+				<div class="card-body">
+					<center>
+						<i class="	fa fa-car" style="font-size: 48px;color: blue;"></i>
+					</center>
+					<h5 class="card-title" align="center" >Book Car<div th:if="${message}" th:text="${message}" class="alert alert-danger mt-2" />
+<div th:if="${error}" th:text="${error}"  class="alert alert-success"/></h5>
+					
+					<hr />
+					<form th:action="@{/user/book/vehicles}" method="post" th:object="${form}">
+					<input type="hidden" th:field="*{vehicleId}" th:value="${vehicles.id}">
+					<div class="mb-3">
+							<label for="exampleInputEmail1" class="form-label">Booking Date</label> <input type="date" class="form-control"
+								id="exampleInputEmail1" aria-describedby="emailHelp" th:field="*{bookingDate}" th:value="${form.bookingDate}">
+								<span th:if="${#fields.hasErrors('bookingDate')}" th:errors="*{bookingDate}" class="error"></span>	
+						</div>
+						<div class="mb-3">
+							<label for="exampleInputEmail1" class="form-label">Pick Up</label> <input type="time" class="form-control"
+								id="exampleInputEmail1" aria-describedby="emailHelp" th:field="*{bookingPickupTime}" th:value="${form.bookingPickupTime}">
+								<span th:if="${#fields.hasErrors('bookingPickupTime')}" th:errors="*{bookingPickupTime}" class="error"></span>	
+						</div>
+						<div class="mb-3">
+							<label for="exampleInputEmail1" class="form-label">Name</label> <input type="text" class="form-control"
+								id="exampleInputEmail1" aria-describedby="emailHelp" name="fname" th:value="${fname}" disabled="disabled" >
+									
+						</div>
+						<div class="mb-3">
+							<label for="exampleInputEmail1" class="form-label">Login</label> <input type="text" class="form-control"
+								id="exampleInputEmail1" aria-describedby="emailHelp" name="login" th:value="${login}" disabled="disabled" >
+									
+						</div>
+						
+						<div class="container text-center">
+							<button type="submit" class="btn btn-primary" name="operation" value="Save">Book Now<i class="	fa fa-sign-in"></i></button>
+							<button type="reset" class="btn btn-primary">Reset<i class="	fa fa-sign-in"></i></button>
+						</div>
+					</form>
+				</div>
+			</div>
+    </div>
+  </div>
+</div>
+<div th:replace="fragments ::html_footer"></div>
+</body>
+</html>

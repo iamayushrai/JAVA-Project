@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="html_head">
+<style type="text/css">
+#form1 {
+	display: none;
+}
+#form2{
+display: none;
+}
+#form3{
+display: none;
+}
+</style>
+<meta charset="ISO-8859-1">
+<title>Car-Rent</title>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/fontawesome.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Navbar start -->
+<div class="container">
+<div th:fragment="html_header">
+<nav class="navbar navbar-expand-lg navbar-dark bg-bg f-ch">
+  <div class="container-fluid">
+  
+    <a class="navbar-brand" th:href="@{/}">
+    	<i class="fa fa-car"></i>
+    Car-Rent</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+  <div class="collapse navbar-collapse" id="navbarSupportedContent" th:if=${session.user==null}>
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/}"><i class="fa fa-home"></i> Home</a>
+  </li>  
+  	<li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/login}"><i class="fa fa-sign-in"></i> Login</a>
+  	</li>
+  </ul>
+  <ul class="navbar-nav mr-auto">
+  <li class="nav-item">
+  <a class="nav-link active" aria-current="page" th:href="@{/contact}"><i class="fa fa-phone"></i> Contact Us</a>
+	</li>
+	<li class="nav-item">
+  <a class="nav-link active" aria-current="page" th:href="@{/about}"><i class="fa fa-info"></i> About Us</a>
+	</li>
+  </ul>
+  
+  </div>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent" th:if=${session.user!=null}>
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0" th:if=${session.user.roleId=="1"}>
+  <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/}"><i class="fa fa-home"></i> Home</a>
+  </li>  
+  	
+  	<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+           <i class="	fa fa-life-bouy"></i> Brand
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#" aria-current="page" th:href="@{/admin/brand/add}">Add Brand</a></li>
+            <li><a class="dropdown-item" href="#" aria-current="page" th:href="@{/admin/brands}">View Brands</a></li>
+          </ul>
+        </li>
+  	<!-- <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/admin/categories}">Vehicle</a>
+  	</li> -->
+  	<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-car"></i> Vehicle
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#" aria-current="page" th:href="@{/admin/vehicle/add}">Add Vehicle</a></li>
+            <li><a class="dropdown-item" href="#" aria-current="page" th:href="@{/admin/vehicles}">View Vehicle</a></li>
+          </ul>
+        </li>
+  	<!-- <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/admin/product/add}">User Report</a>
+  	</li> -->
+  	<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-users"></i> User
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#" aria-current="page" th:href="@{/admin/users}">User List</a></li>
+            <li><a class="dropdown-item" href="#" aria-current="page" th:href="@{/admin/user/booking}">Booking Report</a></li>
+          </ul>
+        </li>
+  <!-- 	<li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/admin/products}">Booking Report</a>
+  	</li> -->
+  	
+  </ul>
+
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0" th:if=${session.user.roleId=="2"}>
+  <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/}"><i class="fa fa-home"></i> Home</a>
+  </li>  
+  	<li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/user/cars}"><i class="fa fa-car"></i> View Cars</a>
+  	</li>
+  	<li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/user/booking}"><i class="	fa fa-thumbs-o-up"></i> View Bookings</a>
+  	</li>
+  </ul>  
+  </div>
+  <!-- next  -->
+  <div class="collapse navbar-collapse" id="navbarSupportedContent" th:if=${session.user!=null}>
+  <ul class="navbar-nav mr-auto">
+  <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/login/profile}"><i class="	fa fa-user"></i> My Profile</a>
+  </li>  
+  <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/login/changepassword}"><i class="	fa fa-cog"></i> Change Password</a>
+  </li>	
+  
+  <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/login}"><i class="	fa fa-sign-out"></i> Logout</a>
+  </li>
+  </ul>
+
+  
+  </div>
+  </div>
+</nav>
+</div>
+<!-- Navbar end -->
+
+</div>
+<div th:fragment="html_footer" class="text-center">
+
+<footer class="footer" >
+  <div class="container" >
+    <span class="text-muted " >&copy; 2021-2022 All Rights Reserved.</span>
+  </div>
+</footer>
+
+</div>
+
+</body>
+</html>

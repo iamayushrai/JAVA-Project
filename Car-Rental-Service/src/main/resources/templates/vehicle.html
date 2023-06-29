@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+<head th:replace="fragments ::html_head">
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+	<div th:replace="fragments ::html_header"></div>
+	<div class="container">
+		<div class="card shadow f-ch"
+			style="width: 35rem; margin-top: 10px; border-radius: 50px; background-color: #F5F5F5;">
+			<div class="card-body">
+				<center>
+					<i class="	fa fa-car" style="font-size: 48px; color: blue;"></i>
+				</center>
+				<h5 class="card-title" align="center">
+					Vehicle
+					<div th:if="${message}" th:text="${message}"
+						class="alert alert-danger mt-2" />
+					<div th:if="${error}" th:text="${error}"
+						class="alert alert-success" />
+				</h5>
+				<hr />
+				<form th:action="@{/admin/vehicle/add}" method="post" enctype="multipart/form-data"
+					th:object="${form}">
+					<input type="hidden" th:field="*{id}" th:value="${form.id}">
+
+					<div class="row">
+						<div class="col">
+							<label class="form">Vehicle Name</label> <input type="text" th:field="*{vehicleName}" th:value="${form.vehicleName}"
+								class="form-control" placeholder="Vehicle name">
+								<span th:if="${#fields.hasErrors('vehicleName')}" th:errors="*{vehicleName}" class="error"></span>
+						</div>
+						<div class="col">
+							<label class="form">Model Name</label> <input type="text" th:field="*{modelName}" th:value="${form.modelName}"
+								class="form-control" placeholder="Model name">
+								<span th:if="${#fields.hasErrors('modelName')}" th:errors="*{modelName}" class="error"></span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							<label class="form">Price</label> <input type="text" th:field="*{price}" th:value="${form.price}"
+								class="form-control" placeholder="Price">
+								<span th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="error"></span>
+						</div>
+						
+						<div class="col">
+							<label class="form">Seater</label> 
+							<select name="seater" class="form-control">
+								<option th:each="seater : ${seatList}" th:text="${seater}" th:value="${seater}" ></option>
+							</select>
+						</div>
+						<span th:if="${#fields.hasErrors('seater')}" th:errors="*{seater}" class="error"></span>
+					</div>
+					<div class="row">
+						
+						<div class="col">
+							<label class="form">Brand</label> <select class="form-control" id="exampleFormControlSelect1" th:field="*{brandId}" name="${brandId}">
+     						<option th:each="seater : ${brandList}" th:text="${seater.carBrand}" th:value="${seater.id}" ></option>
+    </select>
+   <!--  <span th:if="${#fields.hasErrors('brandId')}" th:errors="*{brandId}" class="error"></span> -->
+						</div>
+					</div>
+					<div class="form-group">
+    <label for="exampleFormControlTextarea1">Vehicle Description</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="*{vehicleDescription}" th:value="${form.vehicleDescription}"></textarea>
+  <span th:if="${#fields.hasErrors('vehicleDescription')}" th:errors="*{vehicleDescription}" class="error"></span>
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlFile1">Image</label>
+    <input type="file" class="form-control-file" name="vehicleImage" id="exampleFormControlFile1" th:field="*{vehicleImage}">
+    <!-- <img th:src="@{'/image?id='+${form.id}}" width="100px" height="50px"> -->
+  </div>
+
+					<div class="container text-center mt-2">
+						<button type="submit" class="btn btn-primary" name="operation"
+							value="Save">
+							Add Vehicle<i class="	fa fa-sign-in"></i>
+						</button>
+
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragments ::html_footer"></div>
+</body>
+</html>

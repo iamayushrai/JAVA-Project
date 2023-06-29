@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+<head th:replace="fragments ::html_head">
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+<div th:replace="fragments ::html_header"></div>
+<div class="container">
+<div class="card shadow f-ch" style="width: 35rem; margin-top: 10px; border-radius: 50px; background-color: #F5F5F5; " >
+				<div class="card-body">
+					<center>
+						<i class="	fa fa-user-plus" style="font-size: 48px;color: blue;"></i>
+					</center>
+					<h5 class="card-title" align="center" >User Info<div th:if="${message}" th:text="${message}" class="alert alert-danger mt-2" />
+<div th:if="${error}" th:text="${error}"  class="alert alert-success"/></h5>
+					
+					<hr />
+					<form th:action="@{/register}" method="post" th:object="${form}">
+					<div class="mb-3">
+							<label for="exampleInputEmail1" class="form-label">First Name</label> <input type="text" class="form-control"
+								id="exampleInputEmail1" aria-describedby="emailHelp" th:field="*{firstName}" th:value="${form.firstName}" disabled="disabled">
+								<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error"></span>	
+						</div>
+						<div class="mb-3">
+							<label for="exampleInputEmail1" class="form-label">Last Name</label> <input type="text" class="form-control"
+								id="exampleInputEmail1" aria-describedby="emailHelp" th:field="*{lastName}" th:value="${form.lastName}" disabled="disabled">
+								<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error"></span>
+						</div>
+						<div class="mb-3">
+							<label  class="form-label">Gender: </label>
+							<label>Male</label> <input type="radio" class="form-radio" name="male"
+								 th:field="*{gender}" th:value="male" disabled="disabled" >
+								<label>Female</label> <input type="radio" class="form-radio" name="female"
+								 th:field="*{gender}" th:value="female" disabled="disabled">
+								 <label>Other</label> <input type="radio" class="form-radio" name="other"
+								 th:field="*{gender}" th:value="other" disabled="disabled"><br>
+								 <span th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" class="error"></span>
+						</div>
+						<div class="mb-3">
+							<label for="exampleInputEmail1" class="form-label">Contact No.</label> <input type="text" class="form-control"
+								id="exampleInputEmail1" aria-describedby="emailHelp" th:field="*{contactNo}" th:value="${form.contactNo}" disabled="disabled">
+								<span th:if="${#fields.hasErrors('contactNo')}" th:errors="*{contactNo}" class="error"></span>
+						</div>
+						<div class="mb-3">
+							<label for="exampleInputEmail1" class="form-label">Date of Birth</label> <input type="text"  class="form-control"
+								id="exampleInputEmail1" aria-describedby="emailHelp" th:field="*{dob}" th:value="${form.dob}" placeholder="MM/DD/YYYY" disabled="disabled">
+								<span th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}" class="error"></span>
+						</div>
+						<div class="mb-3">
+							<label for="exampleInputEmail1" class="form-label">Email
+								address</label> <input type="email" class="form-control"
+								id="exampleInputEmail1" aria-describedby="emailHelp" th:field="*{login}" th:value="${form.login}" disabled="disabled">
+								<span th:if="${#fields.hasErrors('login')}" th:errors="*{login}" class="error"></span>
+						</div>
+						
+						
+					</form>
+				</div>
+			</div>
+</div>
+<div th:replace="fragments ::html_footer"></div>
+</body>
+</html>

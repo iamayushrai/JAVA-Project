@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+<head th:replace="fragments ::html_head">
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+<div th:replace="fragments ::html_header"></div>
+<div class="container">
+<div class="card shadow f-ch" style="width: 25rem; margin-top: 10px">
+				<div class="card-body">
+					<center>
+						<i class="fa fa-phone"></i>
+					</center>
+					<h5 class="card-title" align="center" >Contact Us<div th:if="${message}" th:text="${message}" class="alert alert-danger mt-2" />
+<div th:if="${error}" th:text="${error}"  class="alert alert-success"/></h5>
+					<hr />
+					<form th:action="@{/contact}" th:object="${form}" method="post">
+						<div class="mb-3">
+							<label for="exampleInputEmail1" class="form-label">Email
+								address</label> <input type="email" class="form-control"
+								id="exampleInputEmail1" aria-describedby="emailHelp" th:field="*{email}" th:value="${form.email}">
+								<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></span>
+						</div>
+						<div class="mb-3">
+							<label for="exampleInputPassword1" class="form-label">Message</label>
+							<textarea rows="" class="form-control" cols="" th:field="*{message}" th:value="${form.message}"></textarea>
+							<span th:if="${#fields.hasErrors('message')}" th:errors="*{message}" class="error"></span>
+						</div>
+						<center>
+							<button type="submit" class="btn btn-info" name="operation" value="Save">Send</button>
+						</center>
+					</form>
+				</div>
+			</div>
+</div>
+<div th:replace="fragments ::html_footer"></div>
+</body>
+</html>

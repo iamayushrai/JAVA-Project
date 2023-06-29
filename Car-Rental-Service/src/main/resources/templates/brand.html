@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+<head th:replace="fragments ::html_head">
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+<div th:replace="fragments ::html_header"></div>
+<div class="container">
+<div class="card shadow f-ch" style="width: 35rem; margin-top: 10px; border-radius: 50px; background-color: #F5F5F5; " >
+				<div class="card-body">
+					<center>
+						<i class="	fa fa-life-bouy" style="font-size: 48px;color: blue;"></i>
+					</center>
+					<h5 class="card-title" align="center" >Brand<div th:if="${message}" th:text="${message}" class="alert alert-danger mt-2" />
+<div th:if="${error}" th:text="${error}"  class="alert alert-success"/></h5>
+					<hr />
+					<form th:action="@{/admin/brand/add}" method="post" th:object="${form}">
+					<input type="hidden" th:field="*{id}" th:value="${form.id}">
+						<div class="mb-3">
+							<label for="exampleInputEmail1" class="form-label">Car Brand</label> <input type="text" class="form-control"
+								id="exampleInputEmail1" aria-describedby="emailHelp" th:field="*{carBrand}" th:vlue="${form.carBrand}">
+								<span th:if="${#fields.hasErrors('carBrand')}" th:errors="*{carBrand}" class="error"></span>
+						</div>
+						<center>
+							<button type="submit" class="btn btn-primary" name="operation" value="Save">Add Brand<i class="	fa fa-sign-in"></i></button>
+							
+						</center>
+					</form>
+				</div>
+			</div>
+</div>
+<div th:replace="fragments ::html_footer"></div>
+</body>
+</html>
